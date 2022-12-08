@@ -1,25 +1,24 @@
 package ru.stepup.payments.mobile;
 
-import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MainApplication {
     public static void main(String[] args) {
-        int num=0;
-        while (true) {
-            String path = new Scanner(System.in).nextLine();
-            File file = new File(path);
-            boolean fileExists = file.exists();
-            boolean isDirectory = file.isDirectory();
+        Line line1 = new Line(new Point(1,3),new Point(5,8));
+        Line line2 = new Line(new Point(10,11),new Point(15,19));
+        Line line3 = new Line(line1.p2, line2.p1);
+        System.out.println(line3);
 
-            if (!fileExists || isDirectory) {
-                System.out.println("Файл не существует либо указан путь к папке, а не к файлу");
-                continue;
-            }
-            System.out.println("Путь указан верно");
-            num++;
-            System.out.println("Это файл номер "+num);
-        }
+        line3.p1.x=line3.p1.x+1;
+        line3.p1.y=line3.p1.y+1;
+        line3.p2.x=line3.p2.x+1;
+        line3.p2.y=line3.p2.y+1;
+
+        System.out.println(line3);
+        System.out.println(line1);
+        System.out.println(line2);
+        System.out.println(line1.len()+ line2.len()+line3.len());
     }
 
     public static int abs(int x){
@@ -70,13 +69,13 @@ public class MainApplication {
     }
 
     public static boolean is35(int x){
-        if (x%3 == 0 || x%5 == 0)
+        if ((x%3 == 0 || x%5 == 0) && (x%15!=0))
             return true;
         return false;
     }
 
     public static boolean magic6(int x, int y){
-        if (x==6 || y==6 || x+y==6 || x-y==6)
+        if (x==6 || y==6 || x+y==6 || x-y==6 || y-x==6)
             return true;
         return false;
     }
@@ -170,7 +169,7 @@ public class MainApplication {
 
     public static boolean equalNum(int x){
         int first=x%10; // первая цифра
-        for(int i=10;x%(i*10)/i>0;i*=10)
+        for(int i=10;abs(x%(i*10)/i)>0;i*=10)
             if (x%(i*10)/i!=first)
                 return false;
         return true;
@@ -221,5 +220,125 @@ public class MainApplication {
             tryNnumber++;
         }
         System.out.println("Кол-во попыток:"+tryNnumber);
+    }
+
+    public static int findFirst(int[] arr, int x){
+        for(int i=0;i<arr.length-1;i++)
+            if (arr[i]==x)
+                return i;
+        return -1;
+    }
+
+    public static int findLast(int[] arr, int x){
+        for(int i=arr.length-1;i>=0;i--)
+            if (arr[i]==x)
+                return i;
+        return -1;
+    }
+
+    public static int maxAbs(int[] arr){
+        int max=arr[0];
+        for(int i=1;i<arr.length-1;i++)
+            if (abs(arr[i])>abs(max))
+                max=arr[i];
+        return max;
+    }
+
+    public static int countPositive(int[] arr){
+        int cnt=0;
+        for(int i=0;i<=arr.length-1;i++)
+            if (arr[i]>0)
+                cnt++;
+        return cnt;
+    }
+
+    public static boolean palindrom(int[] arr){
+        for(int i=0;i<=arr.length-1;i++)
+           if (arr[i]!=arr[arr.length-1-i])
+              return false;
+        return true;
+    }
+
+//    public static void reverse(int[] arr){
+//        for(int i=arr.length-1;i>0;i--)
+//            System.out.print(arr[i]+" ");
+//        System.out.println(arr[0]);
+//    }
+
+    public static void reverse(int[] arr){
+        int[] arr2=new int[arr.length];
+        for(int i=0;i<=arr.length-1;i++)
+            arr2[i]=arr[arr.length-1-i];
+        arr=arr2;
+        System.out.println(Arrays.toString(arr));
+    }
+    public static int[] reverseBack(int[] arr){
+        int[] arr2=new int[arr.length];
+        for(int i=0;i<=arr.length-1;i++)
+            arr2[i]=arr[arr.length-1-i];
+        return arr2;
+    }
+
+    public static int[] concat(int[] arr1, int[] arr2){
+        int[] arr3=new int[arr1.length+arr2.length];
+        for(int i=0;i<=arr1.length-1;i++)
+            arr3[i]=arr1[i];
+        for(int i=0;i<=arr2.length-1;i++)
+            arr3[i+arr1.length]=arr2[i];
+        return arr3;
+    }
+
+    public static int[] findAll(int[] arr, int x){
+        int[] arr2=new int[arr.length];
+        int j=0;
+        for(int i=0;i<=arr.length-1;i++)
+            if (arr[i]==x) {
+                arr2[j]=i;
+                j++;
+            }
+        int[] arr3=new int[j];
+        for(int i=0;i<j;i++)
+            arr3[i]=arr2[i];
+        return arr3;
+    }
+
+    public static int[] deleteNegative(int[] arr){
+        int[] arr2=new int[arr.length];
+        int j=0;
+        for(int i=0;i<=arr.length-1;i++)
+            if (arr[i]>=0) {
+                arr2[j]=arr[i];
+                j++;
+            }
+        int[] arr3=new int[j];
+        for(int i=0;i<j;i++)
+            arr3[i]=arr2[i];
+        return arr3;
+    }
+
+    public static int[] add(int[] arr, int x, int pos){
+        int[] arr2=new int[arr.length+1];
+        for(int i=0;i<=arr.length-1;i++)
+            if (i<pos)
+                arr2[i]=arr[i];
+            else if (i==pos)
+                arr2[i]=x;
+            else if (i>pos)
+                arr2[i]=arr[i-1];
+            arr2[arr.length]=arr[arr.length-1];
+        return arr2;
+    }
+
+    public static int[] add(int[] arr, int[] ins, int pos){
+        int[] arr2=new int[arr.length+ins.length];
+        for(int i=0;i<=arr.length-1;i++)
+            if (i<pos)
+                arr2[i]=arr[i];
+        for(int i=0;i<=ins.length-1;i++)
+            arr2[i+pos]=ins[i];
+        for(int i=pos;i<=arr.length-1;i++)
+            arr2[pos+ins.length]=arr[i-1];
+        arr2[arr.length+ins.length-1]=arr[arr.length-1];
+        return arr2;
     }
 }
