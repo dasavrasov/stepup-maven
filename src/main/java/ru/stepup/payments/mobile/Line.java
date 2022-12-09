@@ -10,10 +10,10 @@ public class Line {
     }
 
     public Line(int x1, int y1, int x2, int y2) {
-        this.p1.x=x1;
-        this.p1.y=y1;
-        this.p2.x=x2;
-        this.p2.y=y2;
+        this.p1.setX(x1);
+        this.p1.setY(y1);
+        this.p2.setX(x2);
+        this.p2.setY(y2);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class Line {
 
     public double len()
     {
-        return Math.sqrt(Math.pow((p2.x-p1.x),2) + Math.pow((p2.y-p1.y),2));
+        return Math.sqrt(Math.pow((p2.getX() - p1.getX()),2) + Math.pow((p2.getY() - p1.getY()),2));
     }
 
 }
