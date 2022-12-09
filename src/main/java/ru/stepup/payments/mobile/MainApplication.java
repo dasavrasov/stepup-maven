@@ -1,54 +1,34 @@
 package ru.stepup.payments.mobile;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainApplication {
     public static void main(String[] args) {
-        Town a = new Town("A");
-        Town b = new Town("B");
-        Town c = new Town("C");
-        Town d = new Town("D");
-        Town e = new Town("E");
-        Town f = new Town("F");
-        a.addRoute(b,5);
-        a.addRoute(d,6);
-        a.addRoute(f,1);
+        // Создать Ломаную, проходящую через точки {1;5}, {2;8}, {5;3}, {8,9}
+        Polyline polyline=new Polyline(Arrays.asList(new Point(1,5),new Point(2,8),new Point(5,3),new Point(8,9)));
+        System.out.println(polyline);
+        // Рассчитать длину Ломаной
+        double polylen=polyline.len();
+        System.out.println("Длина ломаной: "+polylen);
+        //Получить у Ломаной массив Линий
+        List<Line> lines=polyline.getLines();
+        //Рассчитать длину массива Линий
+        double length=0;
+        for (Line line: lines) {
+            length+=line.len();
+        }
+        System.out.println("Длина массива линий: "+length);
 
-        b.addRoute(a,5);
-        b.addRoute(c,3);
-
-        c.addRoute(b,3);
-        c.addRoute(d,4);
-
-        d.addRoute(a,6);
-        d.addRoute(e,2);
-        d.addRoute(c,4);
-
-        e.addRoute(d,2);
-        e.addRoute(f,2);
-
-        f.addRoute(e,2);
-        f.addRoute(b,1);
-
-        System.out.println("Задача 1: Если передано число 1, результат должен быть либо A, либо С");
-        System.out.println("Ответ:");
-        System.out.println(b.travel(1));
-        System.out.println("=====================================================================");
-        System.out.println("Задача 2: Если передано число 2, результат должен быть либо B, либо D, либо F");
-        System.out.println("Ответ:");
-        System.out.println(b.travel(2));
-        System.out.println("=====================================================================");
-        System.out.println("Задача 3: Если передано число 3, результат может быть любом городом в зависимости от порядка следования путей в списках таковых у городов");
-        System.out.println("Ответ:");
-        System.out.println(b.travel(3));
-
-        System.out.println("Задача 4: Настройте объекты городов так, чтобы при передаче числа 3 последним городом оказался город A");
-        d.delRoute(e); //убрали маршрут B-C-D-E
-        b.delRoute(a); //убрали маршрут B-A-D-C
-        c.delRoute(b); //убрали маршрут B-C-B-C
-        System.out.println("Ответ:");
-        System.out.println(b.travel(3));
+        //Сравнить длину Ломаной и массива Линий: они должны совпасть
+        System.out.println("Результат сравнения длины массива линий и длины ломаной: ");
+        System.out.println(length== polylen);
+        //Сдвинуть координату Точки {2,8} таким образом, чтобы она стала иметь значение {12,8}.
+        // Если изменения отразились в данной точке, в Ломаной и в двух Линиях массива (из пункта 3), то задача решена верно
+        polyline.points.get(1).x=12;
+        System.out.println(polyline);
 
     }
 }
