@@ -7,8 +7,11 @@ import java.util.Scanner;
 
 public class MainApplication {
     public static void main(String[] args) {
-        Square square = new Square(new Point(1,5), 5);
-        System.out.println(square);
-
+        Student student = Student.of("Vasya");
+        student.addGrage(5);
+        student.addGrage(2);
+        student.addGrage(3);
+        System.out.println(student);
+        System.out.println(student.getGrades());
     }
 }
