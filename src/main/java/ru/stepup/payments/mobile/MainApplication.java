@@ -7,21 +7,23 @@ import java.util.Scanner;
 
 public class MainApplication {
     public static void main(String[] args) {
-        Employee emp1 = new Employee("Ivanov");
-        Employee emp2 = new Employee("Petrov");
-        Employee emp3 = new Employee("Sidorov");
-        Department dep1 = new Department("IT");
-        Department dep2 = new Department("Finance");
-        Department dep3 = new Department("Market");
-        emp1.setDepartment(dep1);
-        emp2.setDepartment(dep1);
-        emp3.setDepartment(dep1);
-        dep1.setBoss(emp1);
-//        dep2.setBoss(emp3);
-        emp2.setDepartment(dep2);
-        System.out.println(dep1);
-        System.out.println(emp1);
-        System.out.println(emp2);
-        System.out.println(emp3);
+        // Создать Ломаную, проходящую через точки {1;5}, {2;8}, {5;3}, {8,9}
+        Polyline polyline=new Polyline(Arrays.asList(new Point(1,5),new Point(2,8),new Point(5,3),new Point(8,9)));
+        //System.out.println(polyline.len());
+        List<LengthCounter> listPoly = new ArrayList<>();
+        listPoly.add(polyline);
+        System.out.println("Длина простой ломаной "+getLength(listPoly));
+        CircledPolyline circledPolyline=new CircledPolyline(Arrays.asList(new Point(1,5),new Point(2,8),new Point(5,3),new Point(8,9)));
+        List<LengthCounter> circledlistPoly = new ArrayList<>();
+        circledlistPoly.add(circledPolyline);
+        System.out.println("Длина замкнутой ломаной "+getLength(circledlistPoly));
+    }
+
+    public static double getLength(List<LengthCounter> objList) {
+        double len=0;
+        for (LengthCounter obj : objList) {
+            len+= obj.len();
+        }
+        return len;
     }
 }

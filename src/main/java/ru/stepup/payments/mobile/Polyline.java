@@ -3,7 +3,7 @@ package ru.stepup.payments.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Polyline {
+public class Polyline implements LengthCounter{
     List<Point> points = new ArrayList<Point>();
 
     public Polyline() {

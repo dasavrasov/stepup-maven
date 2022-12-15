@@ -1,6 +1,6 @@
 package ru.stepup.payments.mobile;
 
-public class Line {
+public class Line implements LengthCounter{
     Point p1;
     Point p2;
 
