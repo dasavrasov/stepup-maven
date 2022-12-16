@@ -8,8 +8,8 @@ public class CircledPolyline extends Polyline{
     }
 
     @Override
-    public double len() {
+    public int length() {
         Line lastLine = new Line(this.points.get(0),this.points.get(points.size()-1)); //линия соединяющая начало и конец
-        return super.len()+lastLine.len();
+        return super.length()+lastLine.length();
     }
 }

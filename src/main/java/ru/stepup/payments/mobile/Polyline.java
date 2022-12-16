@@ -33,11 +33,11 @@ public class Polyline implements LengthCounter{
         return lines;
     }
 
-    public double len(){
-        double len=0;
+    public int length(){
+        int len=0;
         List<Line> lines = getLines();
         for (Line line : lines) {
-            len+= line.len();
+            len+= line.length();
         }
         return len;
     }
