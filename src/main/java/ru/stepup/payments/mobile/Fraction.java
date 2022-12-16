@@ -1,6 +1,6 @@
 package ru.stepup.payments.mobile;
 
-public class Fraction {
+public class Fraction extends Number{
     private int numerator; //числитель
     private int denominator; //знаменатель
 
@@ -54,5 +54,25 @@ public class Fraction {
         int newnumer=this.numerator-num*this.denominator;
         int newdenom=this.denominator;
         return new Fraction(newnumer,newdenom);
+    }
+
+    @Override
+    public long longValue() {
+        return (long)numerator/denominator;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float)numerator/denominator;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double)numerator/denominator;
+    }
+
+    @Override
+    public int intValue() {
+        return (int)numerator/denominator;
     }
 }

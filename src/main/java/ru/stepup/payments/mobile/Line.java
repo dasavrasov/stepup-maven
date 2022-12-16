@@ -21,9 +21,9 @@ public class Line implements LengthCounter{
         return "Линия от " + p1 + " до " + p2;
     }
 
-    public double len()
+    public int length()
     {
-        return Math.sqrt(Math.pow((p2.getX() - p1.getX()),2) + Math.pow((p2.getY() - p1.getY()),2));
+        return (int)Math.sqrt(Math.pow((p2.getX() - p1.getX()),2) + Math.pow((p2.getY() - p1.getY()),2));
     }
 
 }

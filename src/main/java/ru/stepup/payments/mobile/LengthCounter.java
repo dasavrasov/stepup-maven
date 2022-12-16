@@ -1,5 +1,7 @@
 package ru.stepup.payments.mobile;
 
+import java.io.Serializable;
+
 public interface LengthCounter {
-    double len();
+    int length();
 }
