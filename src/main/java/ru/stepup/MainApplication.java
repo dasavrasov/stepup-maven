@@ -1,7 +1,6 @@
-package ru.stepup.payments.mobile;
+package ru.stepup;
 
-import java.util.ArrayList;
-import java.util.List;
+import ru.stepup.school.Student;
 
 public class MainApplication {
     public static void main(String[] args) {

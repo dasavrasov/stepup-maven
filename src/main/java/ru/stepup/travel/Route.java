@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.travel;
 
 public class Route {
     Town dest; //город

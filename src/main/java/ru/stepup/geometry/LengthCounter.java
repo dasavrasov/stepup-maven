@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.geometry;
 
 import java.io.Serializable;
 

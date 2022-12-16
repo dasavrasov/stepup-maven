@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.numbers;
 
 public class Fraction extends Number{
     private int numerator; //числитель

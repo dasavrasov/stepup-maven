@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.geometry;
 
 import java.util.ArrayList;
 import java.util.List;

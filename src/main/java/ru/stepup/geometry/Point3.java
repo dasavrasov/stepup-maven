@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.geometry;
 
 public class Point3 extends Point{
     private int z;

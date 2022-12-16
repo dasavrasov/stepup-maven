@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.birds;
 
 public class Parrot extends Bird{
     public Parrot(String text) {
@@ -8,8 +8,8 @@ public class Parrot extends Bird{
     @Override
     public void sing() {
         //путаем буквы
-        int ind1=Bird.getRandomNumber(0,text.length()-1);
-        int ind2=Bird.getRandomNumber(0,text.length()-1);
+        int ind1= getRandomNumber(0,text.length()-1);
+        int ind2= getRandomNumber(0,text.length()-1);
         char letter1 = text.charAt(ind1);
         char letter2 = text.charAt(ind2);
         char[] textArr=text.toCharArray();

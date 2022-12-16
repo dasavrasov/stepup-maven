@@ -1,6 +1,4 @@
-package ru.stepup.payments.mobile;
-
-import java.util.Random;
+package ru.stepup.birds;
 
 //Кукушка
 public class Cuckoo extends Bird{
@@ -10,7 +8,7 @@ public class Cuckoo extends Bird{
 
     @Override
     public void sing() {
-        for (int i=0;i<=Bird.getRandomNumber(1,10);i++)
+        for (int i = 0; i<= getRandomNumber(1,10); i++)
             super.sing();
     }
 }

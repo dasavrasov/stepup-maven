@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.office;
 
 public class Employee {
     private final String name;

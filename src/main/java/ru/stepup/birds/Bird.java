@@ -1,4 +1,4 @@
-package ru.stepup.payments.mobile;
+package ru.stepup.birds;
 
 public abstract class Bird {
     String text;
