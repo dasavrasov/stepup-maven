@@ -6,7 +6,7 @@ public class Square extends Rectangle{
     }
 
     @Override
-    public double Area() {
-        return super.Area();
+    public double area() {
+        return super.area();
     }
 }
