@@ -1,45 +1,24 @@
 package ru.stepup.payments.mobile;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Student {
-    private String name;
-    private List<Integer> grades=new ArrayList<>();
+public final class Student{
+    private List grades=new ArrayList<>();
+    String name;
 
-    private Student(String name) {
+    Rule rule;
+
+    public Student(String name, Rule rule) {
         this.name = name;
+        this.rule=rule;
     }
 
-    private Student(String name, List<Integer> grades) {
-        this.name = name;
-        this.grades = grades;
+    public void addGrade(int grade){
+        if(rule.check()) grades.add(grade);
     }
 
-    public static Student of(String name){
-        return new Student(name);
-    }
-    public static Student of(String name, List<Integer> grades){
-        return new Student(name,grades);
-    }
-
-    @Override
     public String toString() {
-        return name + " " + Arrays.toString(grades.toArray());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void addGrage(int grade){
-        if (grade<1 || grade>5)
-            throw new IllegalArgumentException("Оценки должны быть в диапазоне от 2 до 5");
-        this.grades.add(grade);
-    }
-
-    public List<Integer> getGrades() {
-        return grades;
+        return "Student{" + " grades =" + grades + ", name=" + name + '}';
     }
 }
