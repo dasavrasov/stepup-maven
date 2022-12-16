@@ -1,8 +1,6 @@
 package ru.stepup.payments.mobile;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication {
