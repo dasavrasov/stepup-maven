@@ -39,7 +39,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.stepup.MainApplication</mainClass>
+                            <mainClass>ru.courses.main.MainApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
