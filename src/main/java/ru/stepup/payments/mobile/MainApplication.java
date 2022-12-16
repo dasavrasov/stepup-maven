@@ -1,23 +1,26 @@
 package ru.stepup.payments.mobile;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication {
     public static void main(String[] args) {
-        Bird sparrow=new Sparrow();
-        sparrow.sing();
+        List<Bird> birds = new ArrayList<>();
+        birds.add(new Sparrow());
+        birds.add(new Cuckoo());
+        birds.add(new Cuckoo());
+        birds.add(new Sparrow());
+        birds.add(new Parrot("Попка дурак"));
+        birds.add(new Sparrow());
+        birds.add(new Parrot("Жираф большой ему видней"));
 
-        System.out.println("---------------------------");
+        BirdsInTheForest(birds);
+    }
 
-        Bird cuckoo=new Cuckoo();
-        cuckoo.sing();
-
-        System.out.println("---------------------------");
-        Bird parrot = new Parrot("Попка дурак");
-        parrot.sing();
+    public static void BirdsInTheForest(List<Bird> birds){
+        for (Bird bird: birds) {
+            bird.sing();
+        }
     }
 
 }
