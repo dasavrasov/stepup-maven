@@ -1,7 +1,5 @@
 package ru.stepup.payments.mobile;
 
-import sun.security.x509.OtherName;
-
 public class Square {
     private Point leftUpCorner;
     private int side;
