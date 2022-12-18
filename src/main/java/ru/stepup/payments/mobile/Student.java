@@ -13,6 +13,9 @@ public class Student {
     }
 
     private Student(String name, List<Integer> grades) {
+        for (Integer grade:grades) {
+            checkGrade(grade);
+        }
         this.name = name;
         this.grades = grades;
     }
@@ -34,12 +37,16 @@ public class Student {
     }
 
     public void addGrage(int grade){
-        if (grade<1 || grade>5)
-            throw new IllegalArgumentException("Оценки должны быть в диапазоне от 2 до 5");
+        checkGrade(grade);
         this.grades.add(grade);
     }
 
     public List<Integer> getGrades() {
         return grades;
+    }
+
+    private void checkGrade(int grade) throws IllegalArgumentException{
+        if (grade<1 || grade>5)
+            throw new IllegalArgumentException("Оценки должны быть в диапазоне от 2 до 5");
     }
 }
