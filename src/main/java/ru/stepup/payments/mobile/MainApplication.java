@@ -14,6 +14,7 @@ public class MainApplication{
 
         Fraction fr3=fr1.clone();
         System.out.println(fr3);
+
         System.out.println("==========================================");
 
         Point point1 = new Point(3,4);
@@ -21,5 +22,15 @@ public class MainApplication{
         System.out.println(point2.equals(point1));
         Point point3 = point1.clone();
         System.out.println(point3);
+
+        System.out.println("==========================================");
+
+        Line line1 = new Line(point1,point2);
+        Line line2 = new Line(point1.clone(),point2.clone());
+        System.out.println(line2.equals(line1));
+        Line line3=line1.clone();
+        System.out.println(line3.equals(line1));
+
+
     }
 }
