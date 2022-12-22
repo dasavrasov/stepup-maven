@@ -26,11 +26,22 @@ public class MainApplication{
         System.out.println("==========================================");
 
         Line line1 = new Line(point1,point2);
-        Line line2 = new Line(point1.clone(),point2.clone());
+        Line line2 = new Line(point2,point1);
+        //        Line line2 = new Line(point1.clone(),point2.clone());
         System.out.println(line2.equals(line1));
         Line line3=line1.clone();
         System.out.println(line3.equals(line1));
 
+        System.out.println("==========================================");
+
+        int[] arr={1,2,3,4};
+
+        Point[] points1= {new Point(1,5),new Point(2,8),new Point(5,3),new Point(8,9)};
+        Point[] points2= {new Point(8,9), new Point(1,5),new Point(2,8),new Point(5,3)};
+        Polyline polyline1=new Polyline(points1);
+        Polyline polyline2=new Polyline(points2);
+
+        System.out.println(polyline1.equals(polyline2));
 
     }
 }
