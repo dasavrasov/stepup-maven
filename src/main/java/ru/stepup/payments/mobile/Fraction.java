@@ -1,6 +1,8 @@
 package ru.stepup.payments.mobile;
 
-public class Fraction {
+import java.util.Objects;
+
+public class Fraction implements Cloneable{
     private int numerator; //числитель
     private int denominator; //знаменатель
 
@@ -54,5 +56,24 @@ public class Fraction {
         int newnumer=this.numerator-num*this.denominator;
         int newdenom=this.denominator;
         return new Fraction(newnumer,newdenom);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fraction fraction = (Fraction) o;
+        return numerator == fraction.numerator && denominator == fraction.denominator;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerator, denominator);
+    }
+
+    @Override
+    protected Fraction clone() throws CloneNotSupportedException {
+        Fraction fr =Fraction.of(this.numerator,this.denominator);
+        return fr;
     }
 }
