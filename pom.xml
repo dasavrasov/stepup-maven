@@ -39,7 +39,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.stepup.payments.mobile.MainApplication</mainClass>
+                            <mainClass>ru.stepup.payments.mobile.Sum</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
