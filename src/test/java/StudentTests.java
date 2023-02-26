@@ -1,59 +1,79 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import lombok.SneakyThrows;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.mockserver.client.MockServerClient;
-import org.mockserver.integration.ClientAndServer;
+import org.junit.jupiter.api.Test;
 import ru.stepup.payments.mobile.Student;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.mockserver.integration.ClientAndServer.startClientAndServer;
-import static org.mockserver.model.HttpRequest.request;
-import static org.mockserver.model.HttpResponse.response;
-
 public class StudentTests {
-
-    private ClientAndServer mockServer;
-
-    @BeforeEach
-    public void startServer() {
-        mockServer = startClientAndServer(5352);
+    /*
+    * get /student/{id} возвращает JSON студента с указанным ID и заполненным именем, если такой есть в базе, код 200.
+     */
+    @Test
+    public void test1(){
+        RestAssured.given()
+                .baseUri("http://localhost:8080/student/1")
+                .when().get()
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(200)
+                .body("id",Matchers.equalTo("id"))
+                .body("name", Matchers.notNullValue());
     }
 
-    @AfterEach
-    public void stopServer() {
-        mockServer.stop();
+    /*
+    * 2. get /student/{id} возвращает код 404, если студента с данным ID в базе нет.
+     */
+    @Test
+    public void test2(){
+        RestAssured.given()
+                .baseUri("http://localhost:8080/student/-1")
+                .when().get()
+                .then()
+                .statusCode(404);
     }
 
-    @ParameterizedTest(name="Неправильные не попадают в список оценок")
-    @ValueSource(ints = {12,14})
-    void testIncorrectGrade(int grade) {
-        Student stud=new Student("vasia");
-        MockServerClient mockClient = new MockServerClient("localhost", 5352);
-        mockClient.when(request().withMethod("GET")
-                .withPath("/checkGrade")
-                .withQueryStringParameter("grade",String.valueOf(grade)))
-                .respond(response().withBody("false").withStatusCode(200));
-
-        Assertions.assertThrows(IllegalArgumentException.class,()->stud.addGrade(grade));
+    /*
+    * 3. post /student добавляет студента в базу, если студента с таким ID ранее не было,
+    * при этом имя заполнено, код 201.
+     */
+    @Test @SneakyThrows
+    public void test3(){
+        Student student=new Student();
+        student.setName("pete");
+        ObjectMapper mapper=new ObjectMapper();
+        RestAssured.given()
+                .baseUri("http://localhost:8080/student")
+                .contentType(ContentType.JSON)
+                .body(mapper.writeValueAsString(student))
+                .when().post()
+                .then()
+                .statusCode(201)
+                .body("name",Matchers.equalTo(student.getName()));
+    }
+    /*
+    * 4. post /student обновляет студента в базе, если студент с таким ID ранее был, при этом имя заполнено, код 201.
+     */
+    @Test @SneakyThrows
+    public void test4(){
+        Student student=new Student();
+        student.setName("pete");
+        ObjectMapper mapper=new ObjectMapper();
+        RestAssured.given()
+                .baseUri("http://localhost:8080/student")
+                .contentType(ContentType.JSON)
+                .body(mapper.writeValueAsString(student))
+                .when().post()
+                .then()
+                .statusCode(201)
+                .body("name",Matchers.equalTo(student.getName()));
     }
 
-    @ParameterizedTest(name="Правильные попадают в список оценок")
-    @ValueSource(ints = {4,2,5})
-    void testCorrectGrade(int grade) {
-        List<Integer> expectedList=new ArrayList<>();
-        expectedList.add(grade);
-        Student stud=new Student("vasia");
-        MockServerClient mockClient = new MockServerClient("localhost", 5352);
-        mockClient.when(request().withMethod("GET")
-                .withPath("/checkGrade")
-                .withQueryStringParameter("grade",String.valueOf(grade)))
-                .respond(response().withBody("true").withStatusCode(200));
-        stud.addGrade(grade);
-        Assertions.assertEquals(stud.getGrades().get(0),expectedList.get(0));
-    }
 
 }
